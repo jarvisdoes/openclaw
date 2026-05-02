@@ -22,8 +22,9 @@ Docs: https://docs.openclaw.ai
 ### Fixes
 
 - Cron: make scheduler reload schedule comparison tolerate malformed persisted jobs, so one bad cron entry no longer aborts the whole tick. Fixes #75886. Thanks @samfox-ai.
-- MCP/OpenAI: normalize parameter-free tool schemas whose top-level object `properties` is missing, null, or invalid before sending tools to OpenAI, so MCP tools without params stay usable. Fixes #75362. Thanks @tolkonepiu and @SymbolStar.
+- Doctor/channels: warn after migrations when default Telegram or Discord accounts have no configured token and their env fallback (`TELEGRAM_BOT_TOKEN` or `DISCORD_BOT_TOKEN`) is unavailable, with secret-safe migration docs for checking state-dir `.env`. Fixes #74298. Thanks @lolaopenclaw.
 - Control UI/chat: keep live replies visible when a raw session alias such as `main` sends the chat turn but Gateway emits events under the canonical session key for the same run. Fixes #73716. Thanks @teebes.
+- MCP/OpenAI: normalize parameter-free tool schemas whose top-level object `properties` is missing, null, or invalid before sending tools to OpenAI, so MCP tools without params stay usable. Fixes #75362. Thanks @tolkonepiu and @SymbolStar.
 - CLI/models: reject `--agent` on `openclaw models set` and `set-image` instead of silently writing agent-scoped requests to global model defaults. Fixes #68391. Thanks @derrickabellard.
 - CLI: stop treating the legacy singular `openclaw tool ...` token as a plugin id under restrictive `plugins.allow`, so it falls through as a normal unknown/reserved command instead of suggesting a stale allowlist entry. Fixes #64732. Thanks @efe-arv, @SweetSophia, and @hashtag1974.
 - Media: write inbound media buffers through same-directory temp files before rename, so failed disk writes do not leave zero-byte artifacts for later voice transcription. Fixes #55966. Thanks @OpenCodeEngineer.
